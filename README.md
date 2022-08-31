@@ -1,4 +1,4 @@
-### Android Circular Slider  [![](https://jitpack.io/v/Mindinventory/AndroidCircularSlider.svg)](https://jitpack.io/#Mindinventory/AndroidCircularSlider) ![](https://img.shields.io/github/languages/top/Mindinventory/AndroidCircularSlider) ![](https://img.shields.io/github/license/Mindinventory/AndroidCircularSlider)
+### Android Circular Slider  [![](https://jitpack.io/v/Mindinventory/AndroidCircularSlider.svg)](https://jitpack.io/#Mindinventory/AndroidCircularSlider) ![](https://img.shields.io/github/languages/top/Mindinventory/AndroidCircularSlider)
 
 
 Create Highly Customizable Circular Slider made with Jetpack compose

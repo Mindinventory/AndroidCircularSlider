@@ -2,7 +2,7 @@
 Create Highly Customizable Circular Slider made with Jetpack compose
 
 ### Preview
-![image](https://git.mindinventory.com/mi-android/android-libs/circularslider/-/raw/code_clean_up/art/circularSliderDemo.gif)
+![image](https://github.com/Mindinventory/AndroidCircularSlider/blob/master/art/circularSliderDemo.gif)
 
 ### Features
 - Great look and feel with lots of customization

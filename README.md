@@ -49,7 +49,7 @@ allprojects {
 2. Add the dependency in your app's build.gradle file:
 ```
 dependencies {
-    implementation 'com.github.Mindinventory:circularslider:X.X.X'
+    implementation 'com.github.Mindinventory:AndroidCircularSlider:X.X.X'
 }
 ```
 3. Use this code inside your composable:

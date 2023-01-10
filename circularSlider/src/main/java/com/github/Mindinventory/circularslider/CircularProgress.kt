@@ -6,6 +6,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -53,7 +54,6 @@ import kotlin.math.*
  * @param isDisabled Flag to set enabled/disabled circular slider
  * @param staticProgress Static progress in case if isDisabled is true
  */
-
 @Composable
 fun CircularProgressBar(
     maxNum: Int = 50,
@@ -143,6 +143,15 @@ fun CircularProgressBar(
                         change.consumeAllChanges()
                     }
                 }
+                .pointerInput(Unit) {
+                    detectTapGestures(
+                        onTap = { offset ->
+                            handleCenter = Offset.Zero + offset
+                            angle = getRotationAngle(handleCenter, shapeCenter)
+                        }
+                    )
+                }
+
         ) {
             shapeCenter = center
             radius = size.minDimension / 2

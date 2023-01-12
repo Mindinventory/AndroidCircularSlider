@@ -1,14 +1,11 @@
 package com.github.Mindinventory.circularslider
 
 import android.graphics.Paint
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -22,7 +19,6 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.input.pointer.consumeAllChanges
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -30,7 +26,10 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.github.Mindinventory.circularslider.clock_arms.models.ClockLineType
-import com.github.Mindinventory.circularslider.ui.*
+import com.github.Mindinventory.circularslider.ui.DeepBlue
+import com.github.Mindinventory.circularslider.ui.DullPurple
+import com.github.Mindinventory.circularslider.ui.SkyBlue
+import com.github.Mindinventory.circularslider.ui.TextWhite
 import kotlin.math.*
 
 /**
@@ -146,14 +145,12 @@ fun CircularProgressBar(
                 .pointerInput(Unit) {
                     if (onDragEnabled && !onTouchEnabled) {
                         detectDragGestures { change, dragAmount ->
-                            Log.d("TAG", "CircularProgressBar: 1 => onDragEnabled: $onDragEnabled, onTouchEnabled: $onTouchEnabled")
                             handleCenter += dragAmount
                             angle = getRotationAngle(handleCenter, shapeCenter)
-                            change.consumeAllChanges()
+                            change.consume()
                         }
                     }
                     if (onTouchEnabled && !onDragEnabled) {
-                        Log.d("TAG", "CircularProgressBar: 2 => onDragEnabled: $onDragEnabled, onTouchEnabled: $onTouchEnabled")
 
                         detectTapGestures(
                             onTap = { offset ->
@@ -165,10 +162,6 @@ fun CircularProgressBar(
                 }
                 .pointerInput(Unit) {
                     if (onTouchEnabled && onDragEnabled) {
-                        Log.d(
-                            "TAG",
-                            "CircularProgressBar: 3 => onDragEnabled: $onDragEnabled, onTouchEnabled: $onTouchEnabled"
-                        )
 
                         detectTapGestures(
                             onTap = { offset ->
@@ -180,15 +173,11 @@ fun CircularProgressBar(
                 }
                 .pointerInput(Unit) {
                     if (onTouchEnabled && onDragEnabled) {
-                        Log.d(
-                            "TAG",
-                            "CircularProgressBar: 4 => onDragEnabled: $onDragEnabled, onTouchEnabled: $onTouchEnabled"
-                        )
 
                         detectDragGestures { change, dragAmount ->
                             handleCenter += dragAmount
                             angle = getRotationAngle(handleCenter, shapeCenter)
-                            change.consumeAllChanges()
+                            change.consume()
                         }
                     }
                 }

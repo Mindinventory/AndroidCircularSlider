@@ -6,6 +6,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -18,7 +19,6 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.input.pointer.consumeAllChanges
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -26,7 +26,10 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.github.Mindinventory.circularslider.clock_arms.models.ClockLineType
-import com.github.Mindinventory.circularslider.ui.*
+import com.github.Mindinventory.circularslider.ui.DeepBlue
+import com.github.Mindinventory.circularslider.ui.DullPurple
+import com.github.Mindinventory.circularslider.ui.SkyBlue
+import com.github.Mindinventory.circularslider.ui.TextWhite
 import kotlin.math.*
 
 /**
@@ -77,7 +80,9 @@ fun CircularProgressBar(
     isDisabled: Boolean = false,
     staticProgress: Float = 0f,
     currentProgressToBeReturned: (Float) -> Unit,  //Float type value to be returned..to it's parent composable using State hoisting - we're passing currentPercentage to the parent composable
-    currentUpdatedValue: String = ""
+    currentUpdatedValue: String = "",
+    onTouchEnabled: Boolean = true,
+    onDragEnabled: Boolean = true,
 ) {
     var radius by remember {
         mutableStateOf(0f)
@@ -111,7 +116,8 @@ fun CircularProgressBar(
 
     var currentValue by remember { mutableStateOf(0f) }
     LaunchedEffect(key1 = animatedAngle) {
-        currentValue = if (angle < 1.5) 0f else ((animatedAngle + 3f) * maxNum / 360)     // + 3f to show 100% in the slider
+        currentValue =
+            if (angle < 1.5) 0f else ((animatedAngle + 3f) * maxNum / 360)     // + 3f to show 100% in the slider
     }
 
     var currentPercentage by remember { mutableStateOf(0f) }
@@ -137,10 +143,42 @@ fun CircularProgressBar(
             modifier = Modifier
                 .size(radiusCircle * 2f)
                 .pointerInput(Unit) {
-                    detectDragGestures { change, dragAmount ->
-                        handleCenter += dragAmount
-                        angle = getRotationAngle(handleCenter, shapeCenter)
-                        change.consumeAllChanges()
+                    if (onDragEnabled && !onTouchEnabled) {
+                        detectDragGestures { change, dragAmount ->
+                            handleCenter += dragAmount
+                            angle = getRotationAngle(handleCenter, shapeCenter)
+                            change.consume()
+                        }
+                    }
+                    if (onTouchEnabled && !onDragEnabled) {
+
+                        detectTapGestures(
+                            onTap = { offset ->
+                                handleCenter = Offset.Zero + offset
+                                angle = getRotationAngle(handleCenter, shapeCenter)
+                            },
+                        )
+                    }
+                }
+                .pointerInput(Unit) {
+                    if (onTouchEnabled && onDragEnabled) {
+
+                        detectTapGestures(
+                            onTap = { offset ->
+                                handleCenter = Offset.Zero + offset
+                                angle = getRotationAngle(handleCenter, shapeCenter)
+                            }
+                        )
+                    }
+                }
+                .pointerInput(Unit) {
+                    if (onTouchEnabled && onDragEnabled) {
+
+                        detectDragGestures { change, dragAmount ->
+                            handleCenter += dragAmount
+                            angle = getRotationAngle(handleCenter, shapeCenter)
+                            change.consume()
+                        }
                     }
                 }
         ) {
@@ -297,7 +335,7 @@ fun CircularProgressBar(
             )
         }
         Text(
-            text = if (currentUpdatedValue == "") "${currentPercentage.roundToInt()} %" else currentUpdatedValue ?: "-",
+            text = if (currentUpdatedValue == "") "${currentPercentage.roundToInt()} %" else currentUpdatedValue,
             color = percentageColor,
             fontSize = percentageFontSize,
             fontWeight = FontWeight.Bold,

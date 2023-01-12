@@ -13,28 +13,30 @@ Create Highly Customizable Circular Slider made with Jetpack compose
 - Simple to Implement
 
 ### Attributes
-| Attribute | Description |
-| ------ | ------ |
-| ```maxNum``` | To provide maximum number for the slider |
-| ```radiusCircle``` | Radius of the circular slider |
-| ```percentageFontSize``` | Font size of the percentage text |
-| ```percentageColor``` | Color of the percentage text |
-| ```progressWidth``` | Width of the Progress |
+| Attribute | Description                               |
+| ------ |-------------------------------------------|
+| ```maxNum``` | To provide maximum number for the slider  |
+| ```radiusCircle``` | Radius of the circular slider             |
+| ```percentageFontSize``` | Font size of the percentage text          |
+| ```percentageColor``` | Color of the percentage text              |
+| ```progressWidth``` | Width of the Progress                     |
 | ```animDuration``` | To set duration for the sliding animation |
-| ```animDelay``` | To set delay for the sliding animation |
-| ```strokeCap``` | To set strokes of the ends |
-| ```thumbRadius``` | To set the radius of the thumb |
+| ```animDelay``` | To set delay for the sliding animation    |
+| ```strokeCap``` | To set strokes of the ends                |
+| ```thumbRadius``` | To set the radius of the thumb            |
 | ```tickColor``` | To set the color of the minute-like clock arms | 
 | ```tickhighlightedColor``` | To set the color of the hour-like clock arms | 
-| ```dialColor``` | Dial color |
-| ```progressColor``` | Color of the progress bar |
-| ```startThumbCircleColor``` | Initial thumb color |
-| ```thumbColor``` | Thumb color |
-| ```trackColor``` | Track color |
-| ```trackOpacity``` | Opacity of the track |
-| ```trackWidth``` | Width of the track |
+| ```dialColor``` | Dial color                                |
+| ```progressColor``` | Color of the progress bar                 |
+| ```startThumbCircleColor``` | Initial thumb color                       |
+| ```thumbColor``` | Thumb color                               |
+| ```trackColor``` | Track color                               |
+| ```trackOpacity``` | Opacity of the track                      |
+| ```trackWidth``` | Width of the track                        |
 | ```isDisabled``` | Flag to set enabled/disabled circular slider |
 | ```staticProgress``` | Static progress in case if isDisabled is true |
+| ```onTouchEnabled``` | To enable thumb movement based on touch event |
+| ```onDragEnabled``` | To enable thumb movement on drag movement |
 
 
 ### :thinking: How to use it?

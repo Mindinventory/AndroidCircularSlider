@@ -127,7 +127,8 @@ fun MiProjectPlanning() {
                         },
                         currentUpdatedValue = "${currentItem.roundToInt()}/$maxNumber",
                         maxNum = maxNumber,
-
+                        onTouchEnabled = true,
+                        onDragEnabled = true
                     )
                 }
             }
